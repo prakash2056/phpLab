@@ -1,7 +1,7 @@
 <?php 
 include 'dbconnect.php';
 
-$SN = $_POST['SN'];
+$Name_id = $_POST['Name_id'];
 $FirstName = $_POST['FirstName'];
 $MiddleName = $_POST['MiddleName'];
 $LastName = $_POST['LastName'];
@@ -9,7 +9,7 @@ $Address = $_POST['Address'];
 $mobile = $_POST['mobile'];
 
 
-$sql = "UPDATE studentinfo set FirstName='$FirstName', MiddleName='$MiddleName', LastName='$LastName', Address='$Address', mobile='$mobile' where SN= $SN";
+$sql = "UPDATE studentinfo set FirstName='$FirstName', MiddleName='$MiddleName', LastName='$LastName', Address='$Address', mobile='$mobile' where Name_id= $Name_id";
 
 $result = mysqli_query($conn, $sql);
 

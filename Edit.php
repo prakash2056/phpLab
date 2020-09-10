@@ -2,25 +2,26 @@
 <html>
 <head>
 	<title>Contact Form</title>
+	<link rel="stylesheet" type="text/css" href="Update.css">
 	
 </head>
 <body>
 
-	<h1>Update a StudentInfo</h1>
+	
 
 	<?php
 	include 'dbconnect.php';
 
-		$SN = $_GET['SN'];
+		$Name_id = $_GET['Name_id'];
 
-		$sql = "SELECT * from studentinfo where SN = $SN";
+		$sql = "SELECT * from studentinfo where Name_id = $Name_id";
 
 		$result = mysqli_query($conn, $sql);
 
 		if($result){
 
 			$row = mysqli_fetch_assoc($result);
-					$SN = $row['SN'];
+					$Name_id = $row['Name_id'];
 		  			$FirstName = $row['FirstName'];
 		  			$MiddleName = $row['MiddleName'];
 		  			$LastName = $row['LastName'];
@@ -29,15 +30,22 @@
 		}
 
 	 ?>
-
+	 <fieldset>
+	 	<legend><h1>Update a Student Information</h1></legend>
 	<form action="Update.php" method="post">
-		<input type="text" name="FirstName" value="<?php echo $FirstName; ?>" required> </br> </br>
-		<input type="text" name="MiddleName" value="<?php echo $MiddleName; ?>" > <br> <br>
+		<label id="Fname">First Name: </label>
+		<input type="text" name="FirstName"  placeholder="Update First Name" value="<?php echo $FirstName; ?>" required> 
+		<label id="Mname">Middle Name: </label>
+		<input type="text" name="MiddleName" value="<?php echo $MiddleName; ?>" > 
+		<label id="Lname">Last Name: </label>
 		<input type="text" name="LastName" value="<?php echo $LastName; ?>" required> <br> <br>
+		<label id="Add">Address: </label>
 		<input type="text" name="Address" value="<?php echo $Address; ?>" required> <br> <br>
+		<label>Contact No.: </label>
 		<input type="number" name="mobile" value="<?php echo $mobile; ?>" required> <br> <br>
-		<input type="hidden" name="SN" value="<?php echo $SN; ?>">
+		<input type="hidden" name="Name_id" value="<?php echo $Name_id; ?>">
 		<input type="submit" name="submit" value="Update">
 	</form>
+</fieldset>
 </body>
 </html>

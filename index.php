@@ -28,6 +28,7 @@
 	<legend><h2>List of Student Contacts</h2></legend>
 	<table border="1px;">
 		<tr>
+			<th>Name_id</th>
 			<th>FirstName</th>
 			<th>MiddleName</th>
 			<th>LastName</th>
@@ -48,7 +49,7 @@
 		  $mobile = "";
 		  if($result){
 		  		while ($row = mysqli_fetch_assoc($result)) {
-		  			$SN = $row['SN'];
+		  			$Name_id = $row['Name_id'];
 		  			$FirstName=$row['FirstName'];
 		  			$MiddleName=$row['MiddleName'];
 		  			$LastName = $row['LastName'];
@@ -56,14 +57,15 @@
 		  			$mobile = $row['mobile'];
 		?>
 		<tr>
+			<td><?php echo $Name_id;?></td>
 			<td><?php echo $FirstName; ?></td>
 			<td><?php echo $MiddleName; ?></td>
 			<td><?php echo $LastName; ?></td>
 			<td><?php echo $Address; ?></td>
 			<td><?php echo $mobile; ?></td>
 			<td>
-				<a href="Edit.php?SN=<?php echo $SN; ?>">Update</a>
-				<a href="Delete.php?id=<?php echo $SN; ?>">Delete</a>
+				<a href="Edit.php?Name_id=<?php echo $Name_id; ?>">Update</a>
+				<a href="Delete.php?Name_id=<?php echo $Name_id; ?>">Delete</a>
 			</td>
 		</tr>
 

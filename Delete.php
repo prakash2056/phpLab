@@ -1,9 +1,9 @@
 <?php 
 include 'dbconnect.php';
 
-$SN = $_GET['SN'];
+$Name_id = $_GET['Name_id'];
 
-$sql = "DELETE from studentinfo where SN=$SN";
+$sql = "DELETE from studentinfo where Name_id=$Name_id";
 
 $result = mysqli_query($conn, $sql);
 
