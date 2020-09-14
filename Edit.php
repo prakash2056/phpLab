@@ -12,7 +12,7 @@
 	<?php
 	include 'dbconnect.php';
 
-		$Name_id = $_GET['Name_id'];
+		$id = $_GET['id'];
 
 		$sql = "SELECT * from studentinfo where Name_id = $Name_id";
 
@@ -21,7 +21,7 @@
 		if($result){
 
 			$row = mysqli_fetch_assoc($result);
-					$Name_id = $row['Name_id'];
+					$id = $row['id'];
 		  			$FirstName = $row['FirstName'];
 		  			$MiddleName = $row['MiddleName'];
 		  			$LastName = $row['LastName'];
@@ -43,7 +43,7 @@
 		<input type="text" name="Address" value="<?php echo $Address; ?>" required> <br> <br>
 		<label>Contact No.: </label>
 		<input type="number" name="mobile" value="<?php echo $mobile; ?>" required> <br> <br>
-		<input type="hidden" name="Name_id" value="<?php echo $Name_id; ?>">
+		<input type="hidden" name="id" value="<?php echo $id; ?>">
 		<input type="submit" name="submit" value="Update">
 	</form>
 </fieldset>

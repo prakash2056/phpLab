@@ -46,10 +46,21 @@
 	
 </head>
 <body>
+	<?php 
+		session_start();
+		if(!isset($_SESSION['email'])){
+			header('location:login.php');
+		}
+	 ?>
+
+	 <p style="text-align: right;">
+	 	Welcome <?php echo $_SESSION['email']; ?> 
+	 	<a href="logout.php">Logout</a>
+	 </p>
 <fieldset class="a">
 	<legend><h1>Student Information</h1></legend>
 
-	<form action="insert.php"  method="post">
+	<form action="insert.php"  method="post" enctype= multipart/form-data>
 		<label for="fname">First Name</label>
 		 <input type="text" name="FirstName" id="Fname" placeholder="Enter First Name" required>
 		 <label id="Mname">Middle Name</label> 
@@ -59,6 +70,7 @@
 		id="Lname" placeholder="Enter Last Name" required> <br> <br>
 		Address: <input type="text" name="Address"placeholder="Enter your Address" required><br><br>
 		Contact No.: <input type="number" name="mobile" placeholder="Enter your Mobile Number" required> <br> <br>
+		<input type="file" name="photo" required> <br> <br>
 		<input type="submit" name="submit" value="Submit">
 	</form>
 </fieldset>
@@ -68,12 +80,13 @@
 	<table border="1px;">
 		<tr>
 			<th>S.N.</th>
-			<th>Name_id</th>
+			<th>id</th>
 			<th>FirstName</th>
 			<th>MiddleName</th>
 			<th>LastName</th>
 			<th>Address</th>
 			<th>mobile</th>
+			<th>photo</th>
 			<th>Action</th>
 		</tr>
 
@@ -81,44 +94,51 @@
 		  include 'dbconnect.php';
 
 		  $sql = "SELECT * from studentinfo";
-		 /* $sql="SET @row_number=0;
-SELECT
-(@row_number:=@row_number+1) AS SN,
-Name_id,
-FirstName,
-LastName,
-Address,
-mobile
-FROM studentinfo"; */
+	
 		  $result = mysqli_query($conn, $sql);
 		  $FirstName = "";
 		  $MiddleName = "";
 		  $LastName = "";
 		  $Address = "";
 		  $mobile = "";
+		  $baseUrl = "http://localhost/phpLab/";
 		  if($result){
 		  	$sn=0;
 		  		while ($row = mysqli_fetch_assoc($result)) {
-		  			$Name_id = $row['Name_id'];
+		  			$id = $row['id'];
 		  			
 	 	  			$FirstName=$row['FirstName'];
 		  			$MiddleName=$row['MiddleName'];
 		  			$LastName = $row['LastName'];
 		  			$Address=$row['Address'];
 		  			$mobile = $row['mobile'];
+		  			$photo=$row['photo'];
 		  			$sn++;
 		?>
 		<tr>
 			<td><?php echo $sn;?></td>
-			<td><?php echo $Name_id;?></td>
+			<td><?php echo $id;?></td>
 			<td><?php echo $FirstName; ?></td>
 			<td><?php echo $MiddleName; ?></td>
 			<td><?php echo $LastName; ?></td>
 			<td><?php echo $Address; ?></td>
 			<td><?php echo $mobile; ?></td>
 			<td>
-				<a href="Edit.php?Name_id=<?php echo $Name_id; ?>">Update</a>
-				<a href="Delete.php?Name_id=<?php echo $Name_id; ?>">Delete</a>
+				<?php 
+					if(!empty($photo)){
+
+				?>
+					<img src="<?php echo $photo; ?>" height="100px", width="100px">
+				<?php
+					}else{
+				?>
+					<img src="uploads/deault.png" height="100px", width="100px">
+				<?php
+					}
+				 ?>			
+			<td>
+				<a href="Edit.php?id=<?php echo $id; ?>">Update</a>
+				<a href="Delete.php?id=<?php echo $id; ?>">Delete</a>
 			</td>
 		</tr>
 

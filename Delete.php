@@ -1,7 +1,7 @@
 <?php 
 include 'dbconnect.php';
 
-$Name_id = $_GET['Name_id'];
+$id = $_GET['id'];
 
 $sql = "DELETE from studentinfo where Name_id=$Name_id";
 
