@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style> 	body{
+		  background-image:url('abcde.jpg');
+			padding:10px 60px 100px 60px;
+
+		}
+		
+		fieldset.b{
+			
+			margin-left:10px;
+			
+		}
+		h1,h2{
+			color: red;
+			padding: 10px;
+		}
+		legend{
+			text-align: center;
+		}
+		label#Lname,label#Mname{
+			margin-left: 10px;
+		}	
+	form{
+		margin-left: 30px;
+		}
+		table{
+			margin-left: 20px;
+		}
+		th,td{
+			font-size: 15px;
+			color: pink;
+			padding: 7px;
+		}
+		 td {
+			font-size: 15px;
+			color: pink;
+			padding: 7px;
+		}
+
+		</style>
 
 			
 	<title>Contact Form</title>
-	<link rel="stylesheet" type="text/css" href="external.css">
+	
 </head>
 <body>
 <fieldset class="a">
@@ -28,6 +67,7 @@
 	<legend><h2>List of Student Contacts</h2></legend>
 	<table border="1px;">
 		<tr>
+			<th>S.N.</th>
 			<th>Name_id</th>
 			<th>FirstName</th>
 			<th>MiddleName</th>
@@ -41,6 +81,15 @@
 		  include 'dbconnect.php';
 
 		  $sql = "SELECT * from studentinfo";
+		 /* $sql="SET @row_number=0;
+SELECT
+(@row_number:=@row_number+1) AS SN,
+Name_id,
+FirstName,
+LastName,
+Address,
+mobile
+FROM studentinfo"; */
 		  $result = mysqli_query($conn, $sql);
 		  $FirstName = "";
 		  $MiddleName = "";
@@ -48,15 +97,19 @@
 		  $Address = "";
 		  $mobile = "";
 		  if($result){
+		  	$sn=0;
 		  		while ($row = mysqli_fetch_assoc($result)) {
 		  			$Name_id = $row['Name_id'];
-		  			$FirstName=$row['FirstName'];
+		  			
+	 	  			$FirstName=$row['FirstName'];
 		  			$MiddleName=$row['MiddleName'];
 		  			$LastName = $row['LastName'];
 		  			$Address=$row['Address'];
 		  			$mobile = $row['mobile'];
+		  			$sn++;
 		?>
 		<tr>
+			<td><?php echo $sn;?></td>
 			<td><?php echo $Name_id;?></td>
 			<td><?php echo $FirstName; ?></td>
 			<td><?php echo $MiddleName; ?></td>
